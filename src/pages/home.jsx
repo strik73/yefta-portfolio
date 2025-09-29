@@ -2,31 +2,92 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import Navbar from "./navbar";
 
 export default function Home() {
   const contentsRef = useRef(null);
+  const headerRef = useRef(null);
+
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme ? savedTheme === "dark" : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+
+    // Also update <html> class for Tailwind's dark mode
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode((prev) => !prev);
+  };
 
   const scrollToContents = () => {
     contentsRef.current.scrollIntoView({ behavior: "smooth" });
   };
+  const scrollToHeader = () => {
+    headerRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <div className="min-h-screen font-sans">
+    <div
+      className={`min-h-screen font-sans bg-neutral-200 dark:bg-neutral-900 ${
+        darkMode ? "dark" : ""
+      }`}
+    >
+      {/* Nav Bar */}
+      <div className={`sticky top-0 z-50 mb-1 ${darkMode ? "dark" : ""}`}>
+        <nav className="sticky top-0 z-50 shadow-sm bg-gray-200 dark:bg-gray-900 dark:text-white after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    <a
+                      onClick={scrollToHeader}
+                      className="rounded-md px-5 py-2 text-2xl font-medium shadow-sm text-black bg-gray-300/40 outline-gray-400/20 dark:text-white dark:bg-gray-500/20 hover:scale-110 transition-all duration-200 ease-in-out"
+                    >
+                      Yefta's Portfolio
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <button
+                  onClick={toggleTheme}
+                  className="px-4 py-2 shadow-md rounded-lg bg-gray-300/40 outline outline-gray-400/20 dark:bg-gray-500/20 text-gray-900 dark:text-gray-100 transition"
+                >
+                  {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
       {/*Header*/}
       <header className="relative shadow-sm">
         {/* BG Image (blurred) */}
         <div className="absolute inset-0 bg-[url(/living.jpg)] bg-cover bg-fixed bg-center blur-xs"></div>
 
         {/* Content (not blurred) */}
-        <div className="relative z-10 max-w-xl mx-auto py-10 text-center text-white rounded-4xl">
-          <h1 className="text-4xl font-bold mb-2">
+        <div
+          ref={headerRef}
+          className="relative z-10 max-w-xl mx-auto py-10 text-center text-white rounded-4xl"
+        >
+          <h1 className="text-4xl font-bold mb-2 text-white shadow-2xl">
             Hi, I'm Yefta Steven Marcellius
           </h1>
           <CircularPhoto />
           <div className="text-center mt-8">
             <button
               onClick={scrollToContents}
-              className="bg-gray-800 hover:bg-gray-600 hover:scale-110 text-white font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out"
+              className="bg-[#43766C] hover:bg-teal-600 dark:bg-neutral-800 dark:hover:bg-neutral-700 hover:scale-110 text-white font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out"
             >
               Learn More!
             </button>
@@ -36,7 +97,11 @@ export default function Home() {
 
       {/* About Section */}
       <section className="py-12 text-2xl">
-        <div className="max-w-4xl mx-auto px-6 bg">
+        <div
+          className={`max-w-4xl mx-auto px-6 pt-3 pb-8 rounded-md shadow-md text-black bg-[#ededed] dark:bg-neutral-800 dark:text-white ${
+            darkMode ? "dark" : ""
+          }`}
+        >
           <h2 className="text-4xl font-semibold mb-4">Hello.</h2>
           <p className="leading-relaxed text-justify">
             I'm <span className="font-semibold">Yefta Steven Marcellius </span>a
@@ -51,44 +116,60 @@ export default function Home() {
             I am also interested in graphics design and video editing, such as
             Adobe Photoshop, Canva, and Adobe Premiere Pro.
           </p>
+          <hr className="mt-6" />
         </div>
       </section>
 
       {/* Contents Section */}
       <section ref={contentsRef} className="py-10">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl text-center font-semibold mb-6">
+          <h2 className="text-4xl text-center font-semibold mb-6 text-black dark:text-white">
             Learn More About Me
           </h2>
-          <div className="mx-auto max-w-3xl h-0.5 bg-gray-500 mb-6"></div>
-          <div className="grid md:grid-cols-2 gap-6">
-            <ProjectCard
-              title="About Me"
-              desc="This is my information page."
-              link="/about"
-              buttonText="Learn More"
-              image="/ProfilePicture.JPG"
-            />
-            <ProjectCard
-              title="Projects"
-              desc="Collection of my projects."
-              link="/projects"
-              buttonText="Learn More"
-              image="/projectsheader.png"
-            />
-            <ProjectCard
-              title="Other Projects"
-              desc="Collection of my other projects, such as graphics design and video editing."
-              link="/otherprojects"
-              buttonText="Learn More"
-              image="/quiz.png"
-            />
+          <div className="py-12 px-12 shadow-lg rounded-2xl bg-[#ededed] dark:bg-neutral-800 text-center">
+            <div className="grid md:grid-cols-2 justify-items-center text-left gap-6 ">
+              <ProjectCard
+                title="About Me"
+                desc="This is my information page."
+                link="/about"
+                buttonText="Learn More"
+                image="/ProfilePicture.JPG"
+              />
+              <ProjectCard
+                title="Certificate"
+                desc="My certificates and achievements."
+                link="/certificate"
+                buttonText="Learn More"
+                image="/sql.png"
+              />
+              <ProjectCard
+                title="Projects"
+                desc="Collection of my projects."
+                link="/projects"
+                buttonText="Learn More"
+                image="/projectsheader.png"
+              />
+              <ProjectCard
+                title="Other Projects"
+                desc="Collection of my other projects, such as graphics design and video editing."
+                link="/otherprojects"
+                buttonText="Learn More"
+                image="/quiz.png"
+              />
+            </div>
+
+            <button
+              onClick={scrollToHeader}
+              className="bg-[#43766C] hover:bg-teal-600 hover:scale-110 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out mt-12"
+            >
+              Scroll to Top
+            </button>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-12 text-center">
+      <section className="py-12 text-center text-black dark:text-white">
         <h2 className="text-2xl font-semibold mb-4">Let's Work Together</h2>
         <div className="text-center justify-self-center mb-4 columns-3">
           <a className="" href="https://www.facebook.com/share/1aFzUgxR4d/">
@@ -102,7 +183,7 @@ export default function Home() {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-facebook-icon lucide-facebook"
+              className="lucide lucide-facebook-icon lucide-facebook"
             >
               <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
             </svg>
@@ -148,7 +229,7 @@ export default function Home() {
         </div>
         <a
           href="mailto:yeftasm73@gmail.com"
-          className="inline-flex items-center gap-2 bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
+          className="inline-flex items-center gap-2 bg-[#43766C] text-white p-3 rounded-lg hover:bg-teal-600 dark:bg-neutral-700 dark:hover:bg-neutral-600 transition-all duration-300 ease-in-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -182,11 +263,11 @@ function ProjectCard({ title, desc, link, buttonText, image }) {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-neutral-900 w-3/4 py-4 px-2 rounded-lg shadow hover:shadow-md transition">
+    <div className="bg-gray-300 text-black dark:bg-neutral-900 dark:text-white w-[400px] pb-8 my-6 rounded-lg shadow-md hover:shadow-xl transition">
       <img
         src={image}
         alt={title}
-        className="w-full h-64 object-cover rounded-lg mb-4 px-4"
+        className="w-full h-80 object-cover rounded-lg mb-4 p-4"
       />
 
       <h3 className="text-xl font-semibold ml-4 mb-2">
@@ -195,7 +276,7 @@ function ProjectCard({ title, desc, link, buttonText, image }) {
       <p className="ml-5">{desc}</p>
       <button
         onClick={() => navigate(link)}
-        className="bg-sky-600 text-white px-3 py-1 mt-3 ml-5 rounded-md hover:bg-sky-500 transition-all duration-300 ease-in-out"
+        className="bg-[#43766C] hover:bg-teal-600 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-white px-3 py-1 mt-3 ml-5 rounded-md  transition-all duration-300 ease-in-out"
       >
         {buttonText}
       </button>
@@ -215,10 +296,10 @@ function CircularPhoto() {
   );
 }
 
-function Badge({ text, color = "bg-blue-500", textColor = "text-white" }) {
+function Badge({ text, color = "bg-[#76453B]", textColor = "text-white" }) {
   return (
     <span
-      className={`inline-block px-2 py-1 text-sm font-semibold rounded-full ${color} ${textColor}`}
+      className={`inline-block px-2 py-1 text-sm font-semibold rounded-full dark:bg-blue-500 ${color} ${textColor}`}
     >
       {text}
     </span>

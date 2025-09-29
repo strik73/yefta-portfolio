@@ -13,7 +13,7 @@ export default function Welcome() {
       //   backgroundPosition: "center",
       // }}
     >
-      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center">
+      <div className="absolute inset-0 bg-neutral-900 flex flex-col items-center justify-center text-white text-center">
         <h1 className="text-5xl font-light mb-4">
           <Typewriter
             words={[

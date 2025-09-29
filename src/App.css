@@ -2,11 +2,5 @@
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
-
-:root{
-  background-color: #fffbf5;
-}
-
-.bg-header{
-  background-color: #a7a7a775;
-}
+@import "tailwind/preflight";
+@custom-variant dark (&:where(.dark, .dark *));

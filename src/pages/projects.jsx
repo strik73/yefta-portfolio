@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import Navbar from "./navbar";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,44 +18,51 @@ export default function Projects() {
   const slidesBook = ["/booking.png", "/bookadmin.png", "/createbook.png"];
 
   return (
-    <div className="max-w-3xl mx-auto py-12 px-8 bg-stone-900 rounded-4xl">
-      <button
-        onClick={() => navigate("/home")}
-        className="flex items-center gap-1 bg-sky-600 text-white py-2 mt-3 px-3 rounded-md hover:bg-sky-500 transition-all duration-300 ease-in-out"
-      >
-        <ArrowLeft /> Go Back
-      </button>
-      <h2 className="text-3xl font-bold mb-6 text-center">My Projects</h2>
-      <div className="my-8">
-        <img src="/dashboard.png" className="rounded-2xl" alt="dashboard" />
-      </div>
-      <p className="text-lg mb-4">
-        This page showcases some of my past projects. The projects are mostly
-        made using Laravel and MySQL.
-      </p>
-      <hr className="border-gray-500" />
-      <h3 className="text-3xl font-bold mt-5 mb-3">Projects List</h3>
-      <ul className="list-disc text-xl ml-5">
-        <li>Conten Management System</li>
-        <li>Room Booking System</li>
-      </ul>
-      <div className="mt-10">
-        <Collapse
-          title="Content Management System"
-          content="This is a CMS system where admins can manage the contents of a website. On the
+    <div className="min-h-screen font-sans bg-neutral-200 dark:bg-neutral-900">
+      <Navbar />
+      <div className="max-w-3xl mx-auto py-12 px-8 mt-8 text-black bg-neutral-100 dark:bg-stone-800 dark:text-white rounded-4xl">
+        <button
+          onClick={() => navigate("/home")}
+          className="flex items-center gap-1 bg-[#43766C] hover:bg-teal-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white py-2 mt-3 px-3 rounded-md transition-all duration-300 ease-in-out"
+        >
+          <ArrowLeft /> Go Back
+        </button>
+        <h2 className="text-3xl font-bold mb-6 text-center">My Projects</h2>
+        <div className="my-8">
+          <img src="/dashboard.png" className="rounded-2xl" alt="dashboard" />
+        </div>
+        <p className="text-lg mb-4">
+          This page showcases some of my past projects. The projects are mostly
+          made using Laravel and MySQL.
+        </p>
+        <hr className="border-gray-500" />
+        <h3 className="text-3xl font-bold mt-5 mb-3">Projects List</h3>
+        <ul className="list-disc text-xl ml-5">
+          <li>Conten Management System</li>
+          <li>Room Booking System</li>
+        </ul>
+        <div className="mt-10">
+          <Collapse
+            title="Content Management System"
+            content="This is a CMS system where admins can manage the contents of a website. On the
           side panel there are a list of page where the admins can open and manage the corresponding data"
-          slides={slidesCms}
-        />
-      </div>
-      <div className="mt-10">
-        <Collapse
-          title="Room Booking System"
-          content="This is a room booking system where users can book a room online. Users can
+            slides={slidesCms}
+          />
+        </div>
+        <div className="mt-10">
+          <Collapse
+            title="Room Booking System"
+            content="This is a room booking system where users can book a room online. Users can
           see the available rooms and book them. Admins can manage the bookings and the rooms data on the separate admin panel, they also can approve the booking request.
           There is also a calendar view to see the booked rooms."
-          slides={slidesBook}
-        />
+            slides={slidesBook}
+          />
+        </div>
       </div>
+      <footer className="text-center py-6 text-sm text-gray-500">
+        © {new Date().getFullYear()} Yefta Steven Marcellius. All rights
+        reserved.
+      </footer>
     </div>
   );
 }
