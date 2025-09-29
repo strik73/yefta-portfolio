@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { Typewriter } from "react-simple-typewriter";
 import Navbar from "./navbar";
 
 export default function Home() {
@@ -102,7 +103,22 @@ export default function Home() {
             darkMode ? "dark" : ""
           }`}
         >
-          <h2 className="text-4xl font-semibold mb-4">Hello.</h2>
+          <h2 className="text-4xl font-semibold mb-4">Hello, I'm Yefta.</h2>
+          <div className="mt-2 mb-6 text-3xl">
+            <Typewriter
+              words={[
+                "I do Backend with Laravel.",
+                "I do Frontend with React.",
+              ]}
+              loop={0}
+              cursor
+              cursorStyle="|"
+              typeSpeed={80}
+              deleteSpeed={40}
+              delaySpeed={1200}
+            />
+          </div>
+          <hr className="mb-4" />
           <p className="leading-relaxed text-justify">
             I'm <span className="font-semibold">Yefta Steven Marcellius </span>a
             passionate developer focused on web development based on Bandung,
@@ -133,28 +149,28 @@ export default function Home() {
                 desc="This is my information page."
                 link="/about"
                 buttonText="Learn More"
-                image="/ProfilePicture.JPG"
+                image="/yefta-portfolio/ProfilePicture.JPG"
               />
               <ProjectCard
                 title="Certificate"
                 desc="My certificates and achievements."
                 link="/certificate"
                 buttonText="Learn More"
-                image="/sql.png"
+                image="/yefta-portfolio/sql.png"
               />
               <ProjectCard
                 title="Projects"
                 desc="Collection of my projects."
                 link="/projects"
                 buttonText="Learn More"
-                image="/projectsheader.png"
+                image="/yefta-portfolio/projectsheader.png"
               />
               <ProjectCard
                 title="Other Projects"
                 desc="Collection of my other projects, such as graphics design and video editing."
                 link="/otherprojects"
                 buttonText="Learn More"
-                image="/quiz.png"
+                image="/yefta-portfolio/quiz.png"
               />
             </div>
 
@@ -288,7 +304,7 @@ function CircularPhoto() {
   return (
     <div className="flex justify-center items-center mb-2">
       <img
-        src="/bgputih.jpg"
+        src="/yefta-portfolio/bgputih.jpg"
         alt="Profile"
         className="w-60 h-60 rounded-full object-cover object-[center_20%] border-4 border-gray-200"
       />

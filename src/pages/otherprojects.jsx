@@ -9,11 +9,11 @@ export default function OtherProjects() {
   const navigate = useNavigate();
 
   const graphicsSlides = [
-    "/hack.jpg",
-    "/seeksave.png",
-    "/flyer.png",
-    "/Header.png",
-    "/quiz.png",
+    "/yefta-portfolio/hack.jpg",
+    "/yefta-portfolio/seeksave.png",
+    "/yefta-portfolio/flyer.png",
+    "/yefta-portfolio/Header.png",
+    "/yefta-portfolio/quiz.png",
   ];
 
   const embeds = [

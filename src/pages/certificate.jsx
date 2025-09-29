@@ -53,7 +53,7 @@ export default function Certificate() {
             </h2>
             <img
               className="rounded-2xl gap-0 w-md rotate-90 outline outline-neutral-400 dark:outline-neutral-900"
-              src="/hrta.png"
+              src="/yefta-portfolio/hrta.png"
               alt="sql"
             />
           </div>
@@ -63,7 +63,7 @@ export default function Certificate() {
             </h2>
             <img
               className="rounded-2xl outline outline-neutral-400 dark:outline-neutral-900"
-              src="/bnsp.png"
+              src="/yefta-portfolio/bnsp.png"
               alt="sql"
             />
           </div>

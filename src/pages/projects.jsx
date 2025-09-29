@@ -13,9 +13,17 @@ import "swiper/css/pagination";
 export default function Projects() {
   const navigate = useNavigate();
 
-  const slidesCms = ["/cmsdashboard.png", "/cmspage.png", "/cmsaddcontent.png"];
+  const slidesCms = [
+    "/yefta-portfolio/cmsdashboard.png",
+    "/yefta-portfolio/cmspage.png",
+    "/yefta-portfolio/cmsaddcontent.png",
+  ];
 
-  const slidesBook = ["/booking.png", "/bookadmin.png", "/createbook.png"];
+  const slidesBook = [
+    "/yefta-portfolio/booking.png",
+    "/yefta-portfolio/bookadmin.png",
+    "/yefta-portfolio/createbook.png",
+  ];
 
   return (
     <div className="min-h-screen font-sans bg-neutral-200 dark:bg-neutral-900">
@@ -29,7 +37,11 @@ export default function Projects() {
         </button>
         <h2 className="text-3xl font-bold mb-6 text-center">My Projects</h2>
         <div className="my-8">
-          <img src="/dashboard.png" className="rounded-2xl" alt="dashboard" />
+          <img
+            src="/yefta-portfolio/dashboard.png"
+            className="rounded-2xl"
+            alt="dashboard"
+          />
         </div>
         <p className="text-lg mb-4">
           This page showcases some of my past projects. The projects are mostly
